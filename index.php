@@ -71,6 +71,13 @@ $musicAlbums = [
         'Year'=> 2014,
         'Track'=> 13,
         'Genre'=> 'Blues, Soul, R&B, Folk, Indie rock',
+    ],
+    [
+        'Artist' => 'Saint Motel',
+        'Album'=> 'saintmotelevision',
+        'Year'=> 2019,
+        'Track'=> 10,
+        'Genre'=> 'Indie pop, Indie rock, Funk rock',
     ]
 ];  //fill the collection with albums (also arrays)
 $rows = 10; // amout of tr
@@ -81,7 +88,7 @@ $cols = $musicAlbums;// amjount of td
 <head>
     <meta charset="UTF-8">
     <title>Q's Music Collection</title>
-    <link rel="stylesheet" type="text/css" href="css/style2.css"/>
+    <link rel="stylesheet" type="text/css" href="style2.css"/>
 </head>
 <body>
 <h1>Quincy's Music Collection</h1>
@@ -115,7 +122,7 @@ $cols = $musicAlbums;// amjount of td
 <!--            for ($i = 1; $i <= $rows; $i++) { -->
 <!--                echo "<tr>"; -->
 <!--                for ($k = 1; $k <= $cols; $k++) {-->
-<!--                    echo "<td align='center'>". $rows[$i][$cols[$k]]. "</td>";-->
+<!--                    echo "<td>". $rows[$i][$cols[$k]]. "</td>";-->
 <!--                }-->
 <!--               echo "</tr>";-->
 <!--            }-->
@@ -125,11 +132,11 @@ $cols = $musicAlbums;// amjount of td
         <tr>
 
             <td><?= $x ?></td>
-            <td align='center'><?= $i['Artist'];?></td>
-            <td align='center'><?= $i['Album'];?></td>
-            <td align='center'><?= $i['Year'];?></td>
-            <td align='center'><?= $i['Track'];?></td>
-            <td align='center'><?= $i['Genre'];?></td>
+            <td ><?= $i['Artist'];?></td>
+            <td ><?= $i['Album'];?></td>
+            <td><?= $i['Year'];?></td>
+            <td><?= $i['Track'];?></td>
+            <td><?= $i['Genre'];?></td>
         </tr>
     <?php endforeach; ?>
     </tbody>
