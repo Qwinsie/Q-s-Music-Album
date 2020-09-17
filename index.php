@@ -1,5 +1,5 @@
 <?php
-$x = 0;
+$index = 0;
 $order = ['Artist','Album','Year','Track','Genre']; //Multi dimensional array with the music collection data
 $musicAlbums = [
     [
@@ -7,7 +7,7 @@ $musicAlbums = [
         'Album'=> 'Evolve',
         'Year'=> 2017,
         'Track'=> 12,
-        'Genre'=> 'Pop rock',
+        'Genre'=> 'Pop rock, Alternative rock, Pop, electropop, Indie rock (early)',
     ],
     [
         'Artist' => 'Arctic Monkeys',
@@ -78,10 +78,38 @@ $musicAlbums = [
         'Year'=> 2019,
         'Track'=> 10,
         'Genre'=> 'Indie pop, Indie rock, Funk rock',
+    ],
+    [
+        'Artist' => 'Bad Suns',
+        'Album'=> 'Disappear Here',
+        'Year'=> 2016,
+        'Track'=> 13,
+        'Genre'=> 'Alternative rock, Indie rock, Dream pop, Post-punk',
+    ],
+    [
+        'Artist' => 'half•alive',
+        'Album'=> 'Now, Not Yet',
+        'Year'=> 2019,
+        'Track'=> 12,
+        'Genre'=> 'Indie pop, Pop, Alternative rock, Dance-pop, Electronic rock, Electropop',
+    ],
+    [
+        'Artist' => 'half•alive',
+        'Album'=> '3',
+        'Year'=> 2017,
+        'Track'=> 3,
+        'Genre'=> 'Indie pop, Pop, Alternative rock, Dance-pop, Electronic rock, Electropop',
+    ],
+    [
+        'Artist' => 'Wallows',
+        'Album'=> 'Nothing Happens',
+        'Year'=> 2019,
+        'Track'=> 11,
+        'Genre'=> 'Post-punk, Power pop, Bedroom pop, Alternative rock, Surf punk',
     ]
 ];  //fill the collection with albums (also arrays)
-$rows = 10; // amout of tr
-$cols = $musicAlbums;// amjount of td
+$rows = count($musicAlbums); // amount of tr
+$cols = count($order);// amount of td
 ?>
 <!doctype html>
 <html lang="en">
@@ -96,11 +124,6 @@ $cols = $musicAlbums;// amjount of td
 <table>
     <thead>
     <tr>
-<!--        Selects every fourth element-->
-<!--        among any group of siblings-->
-<!--        :nth-child(odd) {-->
-<!--        color: grey;-->
-<!--        }-->
         <th>#</th>
         <th>Artist</th>     <!--Naam artiest-->
         <th>Album</th>      <!--Naam album-->
@@ -114,31 +137,43 @@ $cols = $musicAlbums;// amjount of td
         <td colspan="6">&copy; Quincy van der Sluis Collection</td>
     </tr>
     </tfoot>
-    <tbody><!--        Loop through all albums in the collection-->
-<!--        drawTable(count($musicAlbums), $order);-->
-<!--        function drawTable($rows, $cols)-->
-<!--        {-->
-<!--            echo "<table border='1'>";-->
-<!--            for ($i = 1; $i <= $rows; $i++) { -->
-<!--                echo "<tr>"; -->
-<!--                for ($k = 1; $k <= $cols; $k++) {-->
-<!--                    echo "<td>". $rows[$i][$cols[$k]]. "</td>";-->
-<!--                }-->
-<!--               echo "</tr>";-->
-<!--            }-->
-<!--            echo "</table>"; -->
-<!--        }-->
-    <?php foreach ($musicAlbums as $i) : $x++?> <!-- Kijkt naar de array en pakt de lengte van de array zodat die er in 1 keer staat-->
-        <tr>
+    <tbody>        <!--Loop through all albums in the collection-->
+        <?php drawTable($musicAlbums, $order);
+        function drawTable($musicAlbums, $order)
+        {
+            for ($i = 0; $i <= sizeof($musicAlbums)-1; $i++) {
+                echo "<tr>";
+                echo "<td>". $i .  "</td>";
+                for ($k = 0; $k <= count($order)-1; $k++) {
+                    try {
+                        if(!$musicAlbums[$i]){
+                            throw new Exception( 'Row'. $i . 'Column'. $k .'does not exist');
+                        }else{
 
-            <td><?= $x ?></td>
-            <td ><?= $i['Artist'];?></td>
-            <td ><?= $i['Album'];?></td>
-            <td><?= $i['Year'];?></td>
-            <td><?= $i['Track'];?></td>
-            <td><?= $i['Genre'];?></td>
-        </tr>
-    <?php endforeach; ?>
+                            echo "<td>". $musicAlbums[$i][$order[$k]]. "</td>";
+                        }
+                    }
+                    catch (Exception $e){
+                        echo $e->getMessage(), "\n";
+                    };
+                }
+               echo "</tr>";
+            }
+            echo "</table>";
+        }
+        ?>
+<!--     Kijkt naar de array en pakt de lengte van de array zodat die er in 1 keer staat-->
+<!--    --><?php //foreach ($musicAlbums as $musicAlbum) : $index++?><!-- -->
+<!--        <tr>-->
+<!---->
+<!--            <td>--><?//= $index ?><!--</td>-->
+<!--            <td >--><?//= $musicAlbum['Artist'];?><!--</td>-->
+<!--            <td >--><?//= $musicAlbum['Album'];?><!--</td>-->
+<!--            <td>--><?//= $musicAlbum['Year'];?><!--</td>-->
+<!--            <td>--><?//= $musicAlbum['Track'];?><!--</td>-->
+<!--            <td>--><?//= $musicAlbum['Genre'];?><!--</td>-->
+<!--        </tr>-->
+<!--    --><?php //endforeach; ?>
     </tbody>
 </table>
 </body>
